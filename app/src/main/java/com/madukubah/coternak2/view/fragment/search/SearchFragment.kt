@@ -3,12 +3,14 @@ package com.madukubah.coternak2.view.fragment.search
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
 import com.madukubah.coternak2.R
+import com.madukubah.coternak2.config.GridItemDecoration
 import com.madukubah.coternak2.config.invisible
 import com.madukubah.coternak2.config.visible
 import com.madukubah.coternak2.view.activity.item.ItemPresenter
@@ -66,9 +68,11 @@ class SearchFragment
             presenter.start()
         }
 
-        rv_cari_items.layoutManager = LinearLayoutManager(context)
+//        rv_cari_items.layoutManager = LinearLayoutManager(context)
+        rv_cari_items.layoutManager = GridLayoutManager(context, 2)
         rv_cari_items.adapter = presenter.adapter
         rv_cari_items.isNestedScrollingEnabled = false
+        rv_cari_items.addItemDecoration( GridItemDecoration( resources.getDimensionPixelSize(R.dimen._2sdp) , 2 ) )
 
         var query = editTextCari.text.toString().trim()
         ( presenter as ItemPresenterAnko ).loadAnkoSearch( query )

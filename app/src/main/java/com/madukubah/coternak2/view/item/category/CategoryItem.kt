@@ -21,7 +21,8 @@ class CategoryItem(private val category: Category,
     override fun bind(viewHolder: ViewHolder, position: Int) {
         val icons = listOf(
                 R.drawable.category_sapi,
-                R.drawable.category_kambing
+                R.drawable.category_kambing,
+                R.drawable.category_olahan
         )
 
         viewHolder.itemView.productName.text = category.category_name.toLowerCase().capitalize()
@@ -33,14 +34,14 @@ class CategoryItem(private val category: Category,
                     )
                 }
         )
-//        ctx?.let {
-//            viewHolder.itemView.productImage.setColorFilter(
-//                ContextCompat.getColor(
-//                        it,
-//                        R.color.colorPrimary
-//                )
-//            )
-//        }
+        ctx?.let {
+            viewHolder.itemView.productImage.setColorFilter(
+                ContextCompat.getColor(
+                        it,
+                        R.color.colorAccent
+                )
+            )
+        }
 //        Picasso.get().load(category.img).into(viewHolder.itemView.productImage)
         viewHolder.itemView.setOnClickListener {
             listener.onCategoryClicked(category)

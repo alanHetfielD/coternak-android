@@ -2,6 +2,7 @@ package com.madukubah.coternak2.view.fragment.menu
 
 import com.madukubah.coternak2.api.BaseApi
 import com.madukubah.coternak2.config.Config
+import com.madukubah.coternak2.model.response.AdsResponse
 import com.madukubah.coternak2.model.response.CategoryResponse
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
@@ -29,6 +30,23 @@ class MenuPresenterAnko
             }
             data.await()
             loadCategory( data.getCompleted() )
+            info { "selesai" }
+        }
+    }
+    fun getAds()
+    {
+        val req = BaseApi.getAds(  )
+        info { "req = "+ req }
+        async(UI)
+        {
+            val data = bg {
+                Config.gson.fromJson(
+                        BaseApi.doRequest( req ),
+                        AdsResponse::class.java
+                )
+            }
+            data.await()
+            loadAds( data.getCompleted() )
             info { "selesai" }
         }
     }
